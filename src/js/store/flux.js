@@ -1,42 +1,60 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+
+			contacts: []
+
+
 		},
+
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			
 
-				//reset the global store
-				setStore({ demo: demo });
+			//getUser gets the user. It just needs the id id of the user you want to get.
+			getUser: async () => {
+				const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`)
+				const data = response.json();
+				setStore({contacts: data})
+			},
+
+			//getList gets the whole list of users, so you can see all the users you have.
+			getList: async () => {
+				const response = await fetch("https://assets.breatheco.de/apis/fake/contact/agenda/testtesttest")
+				const data = await response.json();
+				setStore({contacts: data})
+			},
+
+			//updateUser updates the user. It just needs the id of the user you want to update.
+			updateUser: async () => {
+				await fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						"full_name": "Random Person",
+						"email": "example@gmail.com",
+						"agenda_slug": "testtesttest",
+						"address": "47568 NW 34ST, 33434 FL, USA",
+						"phone": "123446789"
+					})
+				})
+
+			},
+			
+			//createList creates a new seprate list in a new genda_slug
+			createList: async () => {
+				await fetch("https://assets.breatheco.de/apis/fake/contact/", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						"full_name": "Elon Musk",
+						"email": "example@example.com",
+						"agenda_slug": "testtesttest",
+						"address": "Spain",
+						"phone": "7864445566"
+					})
+				})
+
 			}
 		}
 	};
