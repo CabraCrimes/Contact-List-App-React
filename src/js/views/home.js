@@ -13,7 +13,7 @@ export const Home = () => {
 			method: "DELETE",
 			headers: { "Content-Type": "application/json" }
 		})
-		if(response.ok) await actions.getList();
+		if (response.ok) await actions.getList();
 	};
 
 	return (
@@ -38,7 +38,9 @@ export const Home = () => {
 						<p>{contact.phone}</p>
 					</div>
 					<div className="col-3">
-						<button className="btn btn-success me-3">Edit</button>
+						<Link to={"/editcontact/" + contact.id}>
+							<button className="btn btn-success me-3">Edit</button>
+						</Link>
 						<button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target={"#staticBackdrop" + contact.id}>
 							Delete
 						</button>
@@ -55,7 +57,8 @@ export const Home = () => {
 									<div className="modal-footer">
 										<button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
 										<button type="button" className="btn btn-danger" onClick={async (e) => {
-											await deleteUser(contact.id), e.target.setAttribute("data-bs-dismiss", "modal")}} data-bs-dismiss="modal">OK</button>
+											await deleteUser(contact.id), e.target.setAttribute("data-bs-dismiss", "modal")
+										}} data-bs-dismiss="modal">OK</button>
 									</div>
 								</div>
 							</div>

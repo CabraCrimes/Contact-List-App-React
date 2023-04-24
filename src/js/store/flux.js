@@ -9,15 +9,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 
-			
-
-			//getUser gets the user. It just needs the id id of the user you want to get.
-			getUser: async () => {
-				const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`)
-				const data = response.json();
-				setStore({contacts: data})
-			},
-
 			//getList gets the whole list of users, so you can see all the users you have.
 			getList: async () => {
 				const response = await fetch("https://assets.breatheco.de/apis/fake/contact/agenda/testtesttest")
@@ -38,7 +29,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"phone": "123446789"
 					})
 				})
-
 			},
 			
 			//createList creates a new seprate list in a new genda_slug

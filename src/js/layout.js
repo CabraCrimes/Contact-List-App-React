@@ -7,6 +7,7 @@ import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 import { AddContact } from "./views/add-contact";
+import { EditContact } from "./views/edit-contact";
 
 
 
@@ -23,7 +24,8 @@ const Layout = () => {
 					
 					<Routes>
 					<Route path="/" element={<Home />} />
-						<Route path="/contact" element={<AddContact />} />
+					<Route path="/contact" element={<AddContact />} />
+						<Route path="/editcontact/:theid" element={<EditContact />} />
 						<Route path="/demo" element={<Demo />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
